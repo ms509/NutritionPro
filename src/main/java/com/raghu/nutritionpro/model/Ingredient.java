@@ -1,11 +1,17 @@
 package com.raghu.nutritionpro.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 import com.raghu.nutritionpro.enums.CuisineType;
 
@@ -16,15 +22,22 @@ public class Ingredient {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
+	@NotNull
 	private String name;
 
 	private String description;
 
 	@Enumerated(EnumType.STRING)
-	private RecipeType type;
+	@NotNull
+	private RecipeType type = RecipeType.UNKNOWN;
 
 	@Enumerated(EnumType.STRING)
-	private CuisineType cuisineType;
+	@NotNull
+	private CuisineType cuisineType = CuisineType.NONE;
+	
+	@OneToMany
+	@JoinColumn(name = "id")
+	List<SubIngredient> subIngredients = new ArrayList<>();
 
 	public Integer getId() {
 		return id;

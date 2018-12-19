@@ -1,7 +1,18 @@
 package com.raghu.nutritionpro.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Nutrition_Specification")
 public class NutritionSpecification {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private Integer dailyValue;
 	private Double amount;
 	private String unit;
