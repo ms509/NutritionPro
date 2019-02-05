@@ -21,14 +21,33 @@ public class IngredientService {
 		return ingredient;
 	}
 
-	public List<Ingredient> get() {
+	public List<Ingredient> get(String searchText) {
 		List<Ingredient> ingredients = new ArrayList<>();
-		try {
-			ingredients = IteratorUtils.toList(this.repo.findAll().iterator());
-		} catch (Exception e) {
-			e.printStackTrace();
+		List<Ingredient> finalList = new ArrayList<>();
+		Ingredient in1 = new Ingredient();
+		in1.setName("Toor Dal");
+		in1.setDescription("Toor Dal");
+		
+		Ingredient in2 = new Ingredient();
+		in2.setName("Onions");
+		in2.setDescription("Onions");
+		
+		ingredients.add(in1);
+		ingredients.add(in2);
+		
+		for(Ingredient in:ingredients)
+		{
+			if(in.getName().toLowerCase().contains(searchText))
+			{
+				finalList.add(in);
+			}
 		}
+//		try {
+//			ingredients = IteratorUtils.toList(this.repo.findAll().iterator());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
-		return ingredients;
+		return finalList;
 	}
 }
